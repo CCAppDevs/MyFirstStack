@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFirstStack.Data;
 
@@ -11,9 +12,11 @@ using MyFirstStack.Data;
 namespace MyFirstStack.Migrations
 {
     [DbContext(typeof(MyFirstStackDb))]
-    partial class MyFirstStackDbModelSnapshot : ModelSnapshot
+    [Migration("20241024181816_Added_Description")]
+    partial class Added_Description
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,27 +59,6 @@ namespace MyFirstStack.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Car");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.People", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("People");
                 });
 #pragma warning restore 612, 618
         }

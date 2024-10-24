@@ -1,4 +1,6 @@
-﻿namespace MyFirstStack.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyFirstStack.Models
 {
     public class Car
     {
@@ -8,6 +10,6 @@
         public string Model { get; set; }
         public DateTime Year { get; set; }
         public string Color { get; set; }
-        // condition
+        public string Description { get; set; }
     }
 }
