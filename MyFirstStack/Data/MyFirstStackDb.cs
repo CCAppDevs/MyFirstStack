@@ -14,7 +14,8 @@ namespace MyFirstStack.Data
         {
         }
 
-        public DbSet<MyFirstStack.Models.Car> Car { get; set; } = default!;
-        public DbSet<MyFirstStack.Models.People> People { get; set; } = default!;
+        public DbSet<Car> Car { get; set; } = default!;
+        public DbSet<People> People { get; set; } = default!;
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

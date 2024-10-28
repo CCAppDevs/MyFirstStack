@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFirstStack.Data;
 
@@ -11,9 +12,11 @@ using MyFirstStack.Data;
 namespace MyFirstStack.Migrations
 {
     [DbContext(typeof(MyFirstStackDb))]
-    partial class MyFirstStackDbModelSnapshot : ModelSnapshot
+    [Migration("20241028173923_AddedPhoneNumberToPeople")]
+    partial class AddedPhoneNumberToPeople
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,82 +77,13 @@ namespace MyFirstStack.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("People");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.PeoplePhone", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("PeopleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhoneNumberId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PeopleId");
-
-                    b.HasIndex("PhoneNumberId");
-
-                    b.ToTable("PeoplePhone");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.PhoneNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PhoneNumbers");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.PeoplePhone", b =>
-                {
-                    b.HasOne("MyFirstStack.Models.People", "People")
-                        .WithMany("PeoplePhones")
-                        .HasForeignKey("PeopleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MyFirstStack.Models.PhoneNumber", "PhoneNumber")
-                        .WithMany("peoplePhones")
-                        .HasForeignKey("PhoneNumberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("People");
-
-                    b.Navigation("PhoneNumber");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.People", b =>
-                {
-                    b.Navigation("PeoplePhones");
-                });
-
-            modelBuilder.Entity("MyFirstStack.Models.PhoneNumber", b =>
-                {
-                    b.Navigation("peoplePhones");
                 });
 #pragma warning restore 612, 618
         }
