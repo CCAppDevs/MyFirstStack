@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyFirstStack.Models
 {
@@ -7,6 +8,10 @@ namespace MyFirstStack.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [Required]
+        public DateTime BirthDate { get; set; }
+
         public ICollection<PeoplePhone> PeoplePhones { get; set; }
     }
 
@@ -15,7 +20,6 @@ namespace MyFirstStack.Models
         public int Id { get; set; }
         public int PeopleId { get; set; }
         public int PhoneNumberId { get; set; }
-        public People People { get; set; }
         public PhoneNumber PhoneNumber { get; set; }
     }
 
@@ -24,6 +28,5 @@ namespace MyFirstStack.Models
         public int Id { get; set; }
         public string Phone { get; set; }
         public string Type { get; set; }
-        public ICollection<PeoplePhone> peoplePhones { get; set; }
     }
 }
