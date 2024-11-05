@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFirstStack.Data;
 
@@ -11,9 +12,11 @@ using MyFirstStack.Data;
 namespace MyFirstStack.Migrations
 {
     [DbContext(typeof(MyFirstStackDb))]
-    partial class MyFirstStackDbModelSnapshot : ModelSnapshot
+    [Migration("20241105184234_NormalizedAddresses")]
+    partial class NormalizedAddresses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +24,6 @@ namespace MyFirstStack.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MyFirstStack.Models.Address", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
-
-                    b.Property<string>("Address1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Address2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AddressId");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("MyFirstStack.Models.Car", b =>
                 {
@@ -125,7 +96,7 @@ namespace MyFirstStack.Migrations
 
                     b.HasIndex("DealerId");
 
-                    b.ToTable("DealerAddress");
+                    b.ToTable("DealerAddresses");
                 });
 
             modelBuilder.Entity("MyFirstStack.Models.People", b =>
@@ -170,7 +141,7 @@ namespace MyFirstStack.Migrations
 
                     b.HasIndex("PeopleId");
 
-                    b.ToTable("PeopleAddress");
+                    b.ToTable("PeopleAddresses");
                 });
 
             modelBuilder.Entity("MyFirstStack.Models.PeoplePhone", b =>

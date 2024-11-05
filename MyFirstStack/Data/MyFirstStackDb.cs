@@ -14,9 +14,12 @@ namespace MyFirstStack.Data
         {
         }
 
-        public DbSet<Car> Car { get; set; } = default!;
-        public DbSet<People> People { get; set; } = default!;
+        public DbSet<Car> Car { get; set; }
+        public DbSet<People> People { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<PeopleAddresses> PeopleAddress { get; set; }
+        public DbSet<DealerAddresses> DealerAddress { get; set; }
     }
 }

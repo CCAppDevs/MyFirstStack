@@ -13,6 +13,7 @@ namespace MyFirstStack.Models
         public DateTime BirthDate { get; set; }
 
         public ICollection<PeoplePhone> PeoplePhones { get; set; }
+        public ICollection<PeopleAddresses> PeopleAddresses { get; set; }
     }
 
     public class PeoplePhone

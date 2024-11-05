@@ -6,6 +6,6 @@
         public string Name { get; set; }
 
         // helper - Navigation property
-        public ICollection<Address> Addresses { get; set; }
+        public ICollection<DealerAddresses> DealerAddresses { get; set; }
     }
 }

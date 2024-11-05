@@ -29,6 +29,8 @@ namespace MyFirstStack.Controllers
             return await _context.People
                 .Include(p => p.PeoplePhones)
                 .ThenInclude(x => x.PhoneNumber)
+                .Include(p => p.PeopleAddresses)
+                .ThenInclude(pa => pa.Address)
                 .ToListAsync();
         }
 
@@ -36,7 +38,13 @@ namespace MyFirstStack.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<People>> GetPeople(int id)
         {
-            var people = await _context.People.FindAsync(id);
+            var people = await _context.People
+                .Where(p => p.Id == id)
+                .Include(p => p.PeoplePhones)
+                .ThenInclude(x => x.PhoneNumber)
+                .Include(p => p.PeopleAddresses)
+                .ThenInclude(pa => pa.Address)
+                .FirstOrDefaultAsync();
 
             if (people == null)
             {
