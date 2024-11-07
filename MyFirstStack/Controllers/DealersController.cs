@@ -12,47 +12,47 @@ namespace MyFirstStack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeopleController : ControllerBase
+    public class DealersController : ControllerBase
     {
         private readonly MyFirstStackDb _context;
 
-        public PeopleController(MyFirstStackDb context)
+        public DealersController(MyFirstStackDb context)
         {
             _context = context;
         }
 
-        // GET: api/People
+        // GET: api/Dealers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<People>>> GetPeople()
+        public async Task<ActionResult<IEnumerable<Dealer>>> GetDealers()
         {
-            return await _context.People.ToListAsync();
+            return await _context.Dealers.ToListAsync();
         }
 
-        // GET: api/People/5
+        // GET: api/Dealers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<People>> GetPeople(int id)
+        public async Task<ActionResult<Dealer>> GetDealer(int id)
         {
-            var people = await _context.People.FindAsync(id);
+            var dealer = await _context.Dealers.FindAsync(id);
 
-            if (people == null)
+            if (dealer == null)
             {
                 return NotFound();
             }
 
-            return people;
+            return dealer;
         }
 
-        // PUT: api/People/5
+        // PUT: api/Dealers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPeople(int id, People people)
+        public async Task<IActionResult> PutDealer(int id, Dealer dealer)
         {
-            if (id != people.Id)
+            if (id != dealer.DealerId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(people).State = EntityState.Modified;
+            _context.Entry(dealer).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace MyFirstStack.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PeopleExists(id))
+                if (!DealerExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace MyFirstStack.Controllers
             return NoContent();
         }
 
-        // POST: api/People
+        // POST: api/Dealers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<People>> PostPeople(People people)
+        public async Task<ActionResult<Dealer>> PostDealer(Dealer dealer)
         {
-            _context.People.Add(people);
+            _context.Dealers.Add(dealer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPeople", new { id = people.Id }, people);
+            return CreatedAtAction("GetDealer", new { id = dealer.DealerId }, dealer);
         }
 
-        // DELETE: api/People/5
+        // DELETE: api/Dealers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePeople(int id)
+        public async Task<IActionResult> DeleteDealer(int id)
         {
-            var people = await _context.People.FindAsync(id);
-            if (people == null)
+            var dealer = await _context.Dealers.FindAsync(id);
+            if (dealer == null)
             {
                 return NotFound();
             }
 
-            _context.People.Remove(people);
+            _context.Dealers.Remove(dealer);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PeopleExists(int id)
+        private bool DealerExists(int id)
         {
-            return _context.People.Any(e => e.Id == id);
+            return _context.Dealers.Any(e => e.DealerId == id);
         }
     }
 }

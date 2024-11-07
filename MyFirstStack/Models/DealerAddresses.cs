@@ -5,5 +5,6 @@
         public int DealerAddressesId { get; set; }
         public int DealerId { get; set; }
         public int AddressId { get; set; }
+        public Address Address { get; set; }
     }
 }
