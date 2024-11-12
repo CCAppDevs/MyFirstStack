@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFirstStack.Data;
 
@@ -11,9 +12,11 @@ using MyFirstStack.Data;
 namespace MyFirstStack.Migrations
 {
     [DbContext(typeof(MyFirstStackDb))]
-    partial class MyFirstStackDbModelSnapshot : ModelSnapshot
+    [Migration("20241112184451_AddedDefaultCars")]
+    partial class AddedDefaultCars
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,16 +112,6 @@ namespace MyFirstStack.Migrations
                             Model = "Legend",
                             VIN = "223456",
                             Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Color = "Red",
-                            Description = "A Pickup",
-                            Make = "Ford",
-                            Model = "F150",
-                            VIN = "999555444",
-                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -184,22 +177,6 @@ namespace MyFirstStack.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("People");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Jesse",
-                            LastName = "Harlan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "John",
-                            LastName = "Scott"
-                        });
                 });
 
             modelBuilder.Entity("MyFirstStack.Models.PeopleAddresses", b =>
@@ -246,14 +223,6 @@ namespace MyFirstStack.Migrations
                     b.HasIndex("PhoneNumberId");
 
                     b.ToTable("PeoplePhone");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PeopleId = 1,
-                            PhoneNumberId = 1
-                        });
                 });
 
             modelBuilder.Entity("MyFirstStack.Models.PhoneNumber", b =>
@@ -275,14 +244,6 @@ namespace MyFirstStack.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhoneNumbers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Phone = "5551212",
-                            Type = "Cell"
-                        });
                 });
 
             modelBuilder.Entity("MyFirstStack.Models.DealerAddresses", b =>
