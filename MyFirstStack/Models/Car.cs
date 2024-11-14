@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyFirstStack.Models
 {
@@ -11,5 +12,7 @@ namespace MyFirstStack.Models
         public DateTime Year { get; set; }
         public string Color { get; set; }
         public string Description { get; set; }
+        [NotMapped]
+        public DogFact DogFact { get; set; }
     }
 }

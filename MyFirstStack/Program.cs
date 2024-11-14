@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MyFirstStack.Data;
+using MyFirstStack.Infrastructure;
+using static System.Net.WebRequestMethods;
 
 namespace MyFirstStack
 {
@@ -18,6 +20,11 @@ namespace MyFirstStack
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            builder.Services.AddHttpClient<DogFactService>((serviceProvider, client) =>
+            {
+                client.BaseAddress = new Uri("http://dog-api.kinduff.com");
+            });
 
             var app = builder.Build();
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyFirstStack.Data;
+using MyFirstStack.Infrastructure;
 using MyFirstStack.Models;
 
 namespace MyFirstStack.Controllers
@@ -15,17 +16,35 @@ namespace MyFirstStack.Controllers
     public class CarsController : ControllerBase
     {
         private readonly MyFirstStackDb _context;
+        private readonly DogFactService _dogs;
 
-        public CarsController(MyFirstStackDb context)
+        public CarsController(MyFirstStackDb context, DogFactService dogs)
         {
             _context = context;
+            _dogs = dogs;
         }
 
         // GET: api/Cars
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCar()
         {
-            return await _context.Car.ToListAsync();
+            var dogFact = await _dogs.GetFact(3);
+
+            if (dogFact == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Car.Select(c => new Car
+            {
+                Id = c.Id,
+                VIN = c.VIN,
+                Make = c.Make,
+                Year = c.Year,
+                Color = c.Color,
+                Description = c.Description,
+                DogFact = dogFact,
+            }).ToListAsync();
         }
 
         // GET: api/Cars/5

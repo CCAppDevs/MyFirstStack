@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyFirstStack.Data;
+using MyFirstStack.Infrastructure;
 using MyFirstStack.Models;
 
 namespace MyFirstStack.Controllers
@@ -16,7 +17,7 @@ namespace MyFirstStack.Controllers
     {
         private readonly MyFirstStackDb _context;
 
-        public AddressesController(MyFirstStackDb context)
+        public AddressesController(MyFirstStackDb context, IHttpService<string> http)
         {
             _context = context;
         }
